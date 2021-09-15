@@ -1,0 +1,46 @@
+﻿@model IEnumerable<AppMVC.Models.Aluno>
+
+@{
+    ViewBag.Title = "Gestão de Alunos";
+}
+
+<h2>Gestão de Alunos</h2>
+   
+<div class="form-group">
+<a href="@Url.Action("Create")" class="btn btn-primary">Cadastrar aluno</a>
+</div>
+
+<table class="table table-striped table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cpf)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cpf)
+        </td>
+        <td>
+            <a href="@Url.Action("Edit", "Alunos", new { id=item.id })" class="btn btn-warning">Editar</a>
+            <a href="@Url.Action("Details", "Alunos", new { id=item.id })" class="btn btn-primary">Detalhes</a>
+            <a href="@Url.Action("Delete", "Alunos", new { id=item.id })" class="btn btn-danger">Excluir</a>
+        </td>
+    </tr>
+}
+
+</table>
