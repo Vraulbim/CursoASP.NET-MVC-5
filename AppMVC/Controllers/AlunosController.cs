@@ -55,6 +55,9 @@ namespace AppMVC.Controllers
                 aluno.data_matricula = DateTime.Now;
                 db.Alunos.Add(aluno);
                 await db.SaveChangesAsync();
+
+                TempData["Mensagem"] = "Aluno cadastrado com sucesso!";
+
                 return RedirectToAction("Index");
             }
 
