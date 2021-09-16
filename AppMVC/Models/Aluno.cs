@@ -30,5 +30,7 @@ namespace AppMVC.Models
         public DateTime data_matricula { get; set; }
 
         public bool ativo { get; set; }
+
+        public string descricao { get; set; }
     }
 }
