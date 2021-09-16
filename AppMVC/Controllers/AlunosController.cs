@@ -11,11 +11,14 @@ using AppMVC.Models;
 
 namespace AppMVC.Controllers
 {
+    [Authorize]
     public class AlunosController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
         [HttpGet]
+        //[OutputCache(Duration = 60)] Ideal para dados imutáveis
+        [AllowAnonymous]// Permite que mesmo não estando autorizado para acessar o controller, um usuário anônimo acesse o método GET
         [Route("listar-alunos")]
         public async Task<ActionResult> Index()
         {
@@ -47,6 +50,8 @@ namespace AppMVC.Controllers
 
         [HttpPost]
         [Route("novo-aluno")]
+        [HandleError(ExceptionType = typeof(NullReferenceException), View = "ViewExceptionHandler")]
+        //[ValidateInput(false)] Habilita para validações de dados, mesmo sendo de maneira arriscada ou perigosa
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Create([Bind(Include = "id,name,email,cpf,ativo")] Aluno aluno)
         {
